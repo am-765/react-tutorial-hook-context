@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function Square(props) {
+const Square = ({ highlight, onClick, value }) => {
   return (
     <button
-      className={`square ${props.highlight ? 'is-highlight' : ''}`}
-      onClick={props.onClick}
+      className={`square ${highlight ? 'is-highlight' : ''}`}
+      onClick={onClick}
     >
-      {props.value}
+      {value}
     </button>
   );
-}
+};
 
-function Board(props) {
+const Board = ({ squares, onClick, highlights }) => {
   const renderSquare = (i, j = false) => {
     return (
       <Square
-        value={props.squares[i]}
-        onClick={() => props.onClick(i)}
+        value={squares[i]}
+        onClick={() => onClick(i)}
         highlight={j}
         key={i}
       />
@@ -32,15 +32,15 @@ function Board(props) {
         {Array(3)
           .fill(0)
           .map((_, j) =>
-            renderSquare(i * 3 + j, props.highlights.indexOf(i * 3 + j) !== -1)
+            renderSquare(i * 3 + j, highlights.indexOf(i * 3 + j) !== -1)
           )}
       </div>
     ));
 
   return <div>{boardRow}</div>;
-}
+};
 
-function Game(props) {
+const Game = props => {
   const [history, setHistory] = useState([
     { squares: Array(9).fill(null), col: 0, row: 0 }
   ]);
@@ -113,7 +113,7 @@ function Game(props) {
       </div>
     </div>
   );
-}
+};
 
 // ========================================
 
