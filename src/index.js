@@ -20,6 +20,7 @@ class Board extends React.Component {
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
         highlight={j}
+        key={i}
       />
     );
   }
@@ -28,7 +29,7 @@ class Board extends React.Component {
     const boardRow = Array(3)
       .fill(0)
       .map((_, i) => (
-        <div className='board-row'>
+        <div className='board-row' key={i}>
           {Array(3)
             .fill(0)
             .map((_, j) =>
