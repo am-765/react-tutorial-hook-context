@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { calculateWinner } from '../calculateWinner';
 import { Board } from './Board';
+import { Moves } from './Moves';
 
 export const Game = props => {
   const [history, setHistory] = useState([
@@ -36,20 +37,6 @@ export const Game = props => {
   const currentHistory = history[stepNumber];
   const result = calculateWinner(currentHistory.squares);
 
-  const moves = history.map((step, move) => {
-    const isActive = stepNumber === move ? 'is-active' : '';
-    const desc = move
-      ? `Go to move #${move} (${step.col}, ${step.row})`
-      : 'Go to move start';
-    return (
-      <li key={move}>
-        <button className={isActive} onClick={() => jumpTo(move)}>
-          {desc}
-        </button>
-      </li>
-    );
-  });
-
   let status;
   if (result) {
     status = `Winner: ${result.winner}`;
@@ -71,7 +58,19 @@ export const Game = props => {
       <div className='game-info'>
         <div>{status}</div>
         <button onClick={() => switchAsc()}>Asc / Desc</button>
-        <ol>{ascending ? moves : moves.reverse()}</ol>
+        <ol>
+          {ascending ? (
+            <Moves history={history} jumpTo={jumpTo} stepNumber={stepNumber} />
+          ) : (
+            (
+              <Moves
+                history={history}
+                jumpTo={jumpTo}
+                stepNumber={stepNumber}
+              />
+            ).reverse()
+          )}
+        </ol>
       </div>
     </div>
   );
