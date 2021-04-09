@@ -59,14 +59,14 @@ export const Game = props => {
       <Info>
         <Status>{status}</Status>
         <button onClick={() => switchAsc()}>Asc / Desc</button>
-        <ol>
+        <List>
           <Moves
             history={history}
             jumpTo={jumpTo}
             stepNumber={stepNumber}
             ascending={ascending}
           />
-        </ol>
+        </List>
       </Info>
     </Wrapper>
   );
