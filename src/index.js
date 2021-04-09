@@ -1,7 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-
+import { createGlobalStyle } from 'styled-components';
 import { Game } from './components/Game';
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+const GlobalStyle = createGlobalStyle`
+  body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+    margin: 20px;
+  }
+`;
+
+ReactDOM.render(
+  <>
+    <GlobalStyle />
+    <Game />
+  </>,
+  document.getElementById('root')
+);

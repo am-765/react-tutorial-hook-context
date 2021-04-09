@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { calculateWinner } from '../calculateWinner';
 import { Board } from './Board';
 import { Moves } from './Moves';
+import styled from 'styled-components';
 
 export const Game = props => {
   const [history, setHistory] = useState([
@@ -47,7 +48,7 @@ export const Game = props => {
   }
 
   return (
-    <div className='game'>
+    <Wrapper>
       <div className='game-board'>
         <Board
           squares={currentHistory.squares}
@@ -55,23 +56,35 @@ export const Game = props => {
           highlights={result ? result.line : []}
         />
       </div>
-      <div className='game-info'>
-        <div>{status}</div>
+      <Info>
+        <Status>{status}</Status>
         <button onClick={() => switchAsc()}>Asc / Desc</button>
         <ol>
-          {ascending ? (
-            <Moves history={history} jumpTo={jumpTo} stepNumber={stepNumber} />
-          ) : (
-            (
-              <Moves
-                history={history}
-                jumpTo={jumpTo}
-                stepNumber={stepNumber}
-              />
-            ).reverse()
-          )}
+          <Moves
+            history={history}
+            jumpTo={jumpTo}
+            stepNumber={stepNumber}
+            ascending={ascending}
+          />
         </ol>
-      </div>
-    </div>
+      </Info>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Info = styled.div`
+  margin-left: 20px;
+`;
+
+const Status = styled.div`
+  margin-bottom: 10px;
+`;
+
+const List = styled.ol`
+  padding-left: 30px;
+`;
