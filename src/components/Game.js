@@ -59,17 +59,12 @@ export const Game = props => {
         <div>{status}</div>
         <button onClick={() => switchAsc()}>Asc / Desc</button>
         <ol>
-          {ascending ? (
-            <Moves history={history} jumpTo={jumpTo} stepNumber={stepNumber} />
-          ) : (
-            (
-              <Moves
-                history={history}
-                jumpTo={jumpTo}
-                stepNumber={stepNumber}
-              />
-            ).reverse()
-          )}
+          <Moves
+            history={history}
+            jumpTo={jumpTo}
+            stepNumber={stepNumber}
+            ascending={ascending}
+          />
         </ol>
       </div>
     </div>

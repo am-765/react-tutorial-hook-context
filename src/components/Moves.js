@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Moves = ({ history, stepNumber, jumpTo }) => {
-  return history.map((step, move) => {
+export const Moves = ({ history, stepNumber, jumpTo, ascending }) => {
+  const moveItem = history.map((step, move) => {
     const isActive = stepNumber === move ? 'is-active' : '';
     const desc = move
       ? `Go to move #${move} (${step.col}, ${step.row})`
@@ -14,4 +14,5 @@ export const Moves = ({ history, stepNumber, jumpTo }) => {
       </li>
     );
   });
+  return ascending ? moveItem : moveItem.reverse();
 };
